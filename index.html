@@ -2,71 +2,131 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Recebe o Guia da PUPAS Consultoria</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Receba o Guia - PUPAS Consultoria</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       background-color: #0c1f4a;
-      color: #fff;
+      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      text-align: center;
+      color: white;
     }
+
     .container {
-      max-width: 600px;
+      max-width: 500px;
       margin: 60px auto;
       background-color: #132d66;
       padding: 40px;
       border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
     }
+
     img.logo {
       width: 180px;
       margin-bottom: 20px;
     }
+
     h1 {
       font-size: 24px;
       color: #f4c10f;
+      margin-bottom: 10px;
     }
+
     p {
       font-size: 16px;
-      line-height: 1.5;
+      margin-bottom: 25px;
     }
+
     input, button {
       width: 100%;
       padding: 12px;
-      margin-top: 10px;
+      margin: 10px 0;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       font-size: 16px;
     }
+
     input {
-      color: #333;
+      color: #000;
     }
+
     button {
       background-color: #f4c10f;
       color: #0c1f4a;
       font-weight: bold;
       cursor: pointer;
     }
+
     button:hover {
       background-color: #e3b000;
+    }
+
+    .status {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <img src="https://i.imgur.com/x7U4o5p.png" alt="Logo PUPAS Consultoria" class="logo" />
-    <h1>Recebe o Guia Gratuito da PUPAS Consultoria</h1>
+    <img src="https://i.imgur.com/x7U4o5p.png" class="logo" alt="Logo PUPAS Consultoria" />
+    <h1>Recebe o Guia Gratuito da PUPAS</h1>
     <p>Descobre como evitar os 7 maiores erros contábeis nas PMEs com ajuda da Inteligência Artificial.</p>
 
-    <form action="https://api.brevo.com/v3/contacts" method="POST">
-      <input type="text" name="nome" placeholder="Teu Nome" required />
-      <input type="email" name="email" placeholder="Teu Email" required />
-      <input type="text" name="whatsapp" placeholder="WhatsApp (opcional)" />
+    <form id="leadForm">
+      <input type="text" name="nome" id="nome" placeholder="Teu Nome" required />
+      <input type="email" name="email" id="email" placeholder="Teu Email" required />
+      <input type="text" name="whatsapp" id="whatsapp" placeholder="WhatsApp (opcional)" />
       <button type="submit">Quero Receber o Guia Agora</button>
+      <div class="status" id="status"></div>
     </form>
   </div>
+
+  <script>
+    document.getElementById("leadForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nome = document.getElementById("nome").value;
+      const email = document.getElementById("email").value;
+      const whatsapp = document.getElementById("whatsapp").value;
+      const status = document.getElementById("status");
+
+      status.innerText = "A enviar...";
+
+      fetch("https://api.brevo.com/v3/contacts", {
+        method: "POST",
+        headers: {
+          "accept": "application/json",
+          "api-key": "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",
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          email: email,
+          attributes: {
+            NOME: nome,
+            WHATSAPP: whatsapp
+          },
+          listIds: [2], // ID da tua lista no Brevo (ajusto contigo depois)
+          updateEnabled: true
+        })
+      })
+      .then(response => {
+        if (response.ok) {
+          status.innerText = "Enviado com sucesso! Redirecionando...";
+          setTimeout(() => {
+            window.location.href = "7_Erros_Contabeis_PUPAS_Consultoria.pdf";
+          }, 2000);
+        } else {
+          status.innerText = "Erro ao enviar. Verifica os dados ou tenta novamente.";
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        status.innerText = "Erro na ligação. Verifica tua conexão.";
+      });
+    });
+  </script>
 </body>
 </html>
