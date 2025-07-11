@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PUPAS Consultoria – Guia Gratuito</title>
   <link rel="icon" href="Pupas Logo Transparente.png" type="image/png">
-  
+
   <!-- Google Analytics (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
@@ -27,6 +27,7 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', 'XXXXXXXXXXXXXXX'); 
     fbq('track', 'PageView');
+    fbq('track', 'Lead');
   </script>
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXX&ev=PageView&noscript=1"/></noscript>
@@ -90,9 +91,21 @@
 
     footer {
       margin-top: 40px;
-      font-size: 13px;
-      color: #aaa;
-      padding-bottom: 20px;
+      font-size: 14px;
+      color: #444;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    .social-links a {
+      margin: 0 10px;
+      color: #444;
+      text-decoration: none;
+    }
+
+    .social-links img {
+      width: 24px;
+      vertical-align: middle;
     }
   </style>
 </head>
@@ -114,7 +127,23 @@
   </a>
 
   <footer>
-    © 2025 PUPAS Consultoria · Todos os direitos reservados
+    <div>
+      © 2025 PUPAS Consultoria · Todos os direitos reservados
+    </div>
+    <div class="social-links">
+      <a href="https://www.youtube.com/@pupaconsultoria6759" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+        YouTube
+      </a>
+      <a href="https://www.instagram.com/pupasconsultoria" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram">
+        Instagram
+      </a>
+      <a href="mailto:pupasconsultoria@gmail.com">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email">
+        E-mail
+      </a>
+    </div>
   </footer>
 
 </body>
